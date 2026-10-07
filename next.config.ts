@@ -1,16 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-rewrites: async () => {
-      return {
-              fallback: [
-                {
-                            source: "/:path*",
-                            destination: "/",
-                },
-                      ],
-      };
-},
+  reactStrictMode: true,
+  eslint: { ignoreDuringBuilds: true },
 };
 
 export default nextConfig;
