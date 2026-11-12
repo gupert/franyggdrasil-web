@@ -261,3 +261,12 @@ h2 { color: #e9c391; }
 .shop-book { width: 100%; }
 @media (max-width: 820px) { .book3d { max-width: 240px; } }
 @media (max-width: 760px) { .shop-book .book3d { max-width: 260px; } }
+
+/* Mjukare vändning: stilla träffyta, inga tunga skuggor på det som roterar, ingen rörlig bakgrund */
+.hero-bg { animation: none; transform: none; }
+.book3d { position: relative; }
+.book3d::after { content: ""; position: absolute; inset: 0; z-index: 2; }
+.book3d::before { content: ""; position: absolute; inset: 4% 2%; z-index: 0; box-shadow: 0 30px 60px rgba(0,0,0,.7), 0 0 80px -10px rgba(80,150,170,.35); border-radius: 2px; pointer-events: none; }
+.book3d-inner { z-index: 1; will-change: transform; transition: transform .8s cubic-bezier(.4,.2,.2,1); }
+.book3d .face { box-shadow: none; transform: translateZ(0); }
+.book3d .back { transform: rotateY(180deg) translateZ(0); }

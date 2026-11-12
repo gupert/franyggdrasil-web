@@ -36,6 +36,11 @@ export function middleware(req: NextRequest) {
   const queryLang = url.searchParams.get("lang");
   const fixed = fixedLocale(host);
 
+  // skriket.frånyggdrasil.se → köpsidan på frånyggdrasil.se
+  if (host.toLowerCase().startsWith("skriket.")) {
+    return NextResponse.redirect(new URL("/shop", SITE.sv), 308);
+  }
+
   // På de riktiga domänerna byter språkknappen domän (samma sida)
   if (fixed && (queryLang === "sv" || queryLang === "en")) {
     if (queryLang === fixed) {
