@@ -56,27 +56,41 @@ export function Sigil({ id, size = 64 }: { id: CharacterId; size?: number }) {
   );
 }
 
-function portraitSrc(id: CharacterId): string | null {
-  // Lägg en stående bild i public/characters/<namn>.webp (eller .jpg/.png) så visas den automatiskt
+function findImage(name: string): string | null {
   for (const ext of ["webp", "jpg", "png"]) {
-    if (fs.existsSync(path.join(process.cwd(), "public", "characters", `${id}.${ext}`))) {
-      return `/characters/${id}.${ext}`;
+    if (fs.existsSync(path.join(process.cwd(), "public", "characters", `${name}.${ext}`))) {
+      return `/characters/${name}.${ext}`;
     }
   }
   return null;
 }
 
+// Porträtt: public/characters/<namn>.webp – Hela gestalten: public/characters/<namn>-gestalt.webp
+const portraitSrc = (id: CharacterId) => findImage(id);
+export const figureSrc = (id: CharacterId) => findImage(`${id}-gestalt`);
+
 /* Stående porträtt i jugendvalv. Utan bild: siluett av skog + karaktärens sigill. */
-export function Portrait({ id, name, seal }: { id: CharacterId; name: string; seal: string }) {
+// Två världar: <namn>-midgard.webp (vardagskläder) och <namn>.webp (läderrustning i Vanaheim).
+// Med båda bilderna byter personen kläder när man för musen över porträttet.
+export function Portrait({ id, name, seal, labels }: { id: CharacterId; name: string; seal: string; labels?: [string, string] }) {
   const src = portraitSrc(id);
+  const midgard = findImage(`${id}-midgard`);
+  const twoWorlds = Boolean(src && midgard);
   return (
-    <div className="portrait" style={{ ["--seal" as string]: seal }}>
+    <div className={twoWorlds ? "portrait two-worlds" : "portrait"} style={{ ["--seal" as string]: seal }}>
       <svg className="portrait-frame" viewBox="0 0 200 320" preserveAspectRatio="none" aria-hidden="true">
         <path d="M6 316 V110 C6 50 50 6 100 6 C150 6 194 50 194 110 V316 Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
         <path d="M14 316 V112 C14 58 54 14 100 14 C146 14 186 58 186 112 V316" fill="none" stroke="currentColor" strokeWidth=".6" opacity=".5" />
       </svg>
       <div className="portrait-inner">
-        {src ? (
+        {twoWorlds ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="p-midgard" src={midgard!} alt={name} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="p-vanaheim" src={src!} alt="" aria-hidden="true" />
+          </>
+        ) : src ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={src} alt={name} />
         ) : (
@@ -97,6 +111,12 @@ export function Portrait({ id, name, seal }: { id: CharacterId; name: string; se
           </svg>
         )}
       </div>
+      {twoWorlds && (
+        <div className="world-label" aria-hidden="true">
+          <span className="w-midgard">{labels?.[0] ?? "Midgård"}</span>
+          <span className="w-vanaheim">{labels?.[1] ?? "Vanaheim"}</span>
+        </div>
+      )}
       {!src && (
         <div className="portrait-sigil">
           <Sigil id={id} size={72} />

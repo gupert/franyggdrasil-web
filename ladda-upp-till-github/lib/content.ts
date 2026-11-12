@@ -11,6 +11,7 @@ export type Character = {
   seal: string; // färgen på Hervors sigill
   epithet: string;
   hair: string;
+  eyes: string;
   arrived: string;
   intro: string[];
   file: { label: string; text: string }[];
@@ -21,7 +22,7 @@ export type Character = {
 type Dict = {
   meta: { title: string; description: string };
   nav: { home: string; trio: string; shop: string; other: string; otherCode: string };
-  hero: { book: string; slogan: string; ctaBuy: string; ctaMeet: string };
+  hero: { book: string; slogan: string; ctaBuy: string; ctaMeet: string; titleTop: string; titleMid: string; titleBottom: string };
   pitch: { kicker: string; body: string[] };
   trio: { kicker: string; title: string; lead: string; meet: string; age: string };
   series: { kicker: string; title: string; books: string[]; now: string; next: string };
@@ -36,6 +37,9 @@ type Dict = {
     buy: string;
     preorder: string;
     preorderNote: string;
+    amazon: string;
+    amazonNote: string;
+    otherStores: string;
     secure: string;
     notReady: string;
     terms: string;
@@ -50,6 +54,10 @@ type Dict = {
     age: string;
     others: string;
     sealNote: string;
+    figure: string;
+    worlds: [string, string];
+    hoverHint: string;
+    eyes: string;
   };
   footer: { author: string; inspired: string; terms: string };
   characters: Record<CharacterId, Character>;
@@ -64,8 +72,11 @@ const sv: Dict = {
   nav: { home: "Start", trio: "Trion", shop: "Butik", other: "English", otherCode: "en" },
   hero: {
     book: "Bok 1 av 9",
+    titleTop: "Skriket",
+    titleMid: "från",
+    titleBottom: "Yggdrasil",
     slogan: "Trädet minns allt.",
-    ctaBuy: "Förbeställ boken",
+    ctaBuy: "Köp boken",
     ctaMeet: "Möt trion",
   },
   pitch: {
@@ -118,6 +129,9 @@ const sv: Dict = {
     buy: "Köp",
     preorder: "Förbeställ",
     preorderNote: "Förbeställning – boken skickas så snart den är tryckt. Du får ett mejl när den är på väg.",
+    amazon: "Köp på Amazon",
+    amazonNote: "Boken finns nu som pocket. Du handlar och betalar tryggt hos Amazon, som trycker och skickar boken till dig.",
+    otherStores: "Bor du utanför Sverige?",
     secure: "Säker betalning via Stripe – kort, Apple Pay, Google Pay med flera.",
     notReady: "Butiken öppnar inom kort. Skriv upp dig nedan så hör vi av oss.",
     terms: "Köpvillkor",
@@ -136,6 +150,10 @@ const sv: Dict = {
     age: "Ålder",
     others: "De andra två",
     sealNote: "Sigillets färg",
+    figure: "Hela gestalten",
+    worlds: ["Midgård", "Vanaheim"],
+    hoverHint: "För musen över dem – se dem i Vanaheim.",
+    eyes: "Ögon",
   },
   footer: { author: "C G Martini", inspired: "Inspirerad av Eskil Larsson", terms: "Köpvillkor" },
   characters: {
@@ -145,6 +163,7 @@ const sv: Dict = {
       seal: "#1f3a6b",
       epithet: "Han som ritar mönstret",
       hair: "Rött",
+      eyes: "Blå",
       arrived: "På sin trettonårsdag",
       intro: [
         "Eskil sitter i baksätet med skissblocket mot låren. Höger hand arbetar av sig själv. Han har ritat samma mönster sedan dagen då hans mor försvann – dagen efter hans sexårsdag.",
@@ -163,6 +182,7 @@ const sv: Dict = {
       seal: "#7a1c1c",
       epithet: "Han som räknar ärren",
       hair: "Svart",
+      eyes: "Gröna",
       arrived: "På sin trettonårsdag",
       intro: [
         "Svart hår tungt över pannan. Gröna ögon som mäter dig och sjunker tillbaka till serietidningen. En vuxen mans axlar på en trettonåring.",
@@ -181,6 +201,7 @@ const sv: Dict = {
       seal: "#2d5a3a",
       epithet: "Hon som hör kråkorna",
       hair: "Ljust blont",
+      eyes: "Blå",
       arrived: "På sin trettonårsdag",
       intro: [
         "Ljust blont hår faller löst framför ansiktet. Ett rött äpple rullar mellan hennes fingrar längs bordskanten, varv efter varv. Hon gillar inte att prata.",
@@ -209,8 +230,11 @@ const en: Dict = {
   nav: { home: "Home", trio: "The Trio", shop: "Shop", other: "Svenska", otherCode: "sv" },
   hero: {
     book: "Book 1 of 9",
+    titleTop: "The Scream",
+    titleMid: "from",
+    titleBottom: "Yggdrasil",
     slogan: "The tree remembers everything.",
-    ctaBuy: "Pre-order the book",
+    ctaBuy: "Buy the book",
     ctaMeet: "Meet the trio",
   },
   pitch: {
@@ -263,6 +287,9 @@ const en: Dict = {
     buy: "Buy",
     preorder: "Pre-order",
     preorderNote: "Pre-order – the book ships as soon as it is printed. You will get an email when it is on its way.",
+    amazon: "Buy on Amazon",
+    amazonNote: "Out now in paperback (Swedish edition). You order and pay securely through Amazon, who print and ship the book to you.",
+    otherStores: "Outside Sweden?",
     secure: "Secure payment via Stripe – card, Apple Pay and Google Pay.",
     notReady: "The shop opens soon. Sign up below and we will let you know.",
     terms: "Terms of sale",
@@ -281,6 +308,10 @@ const en: Dict = {
     age: "Age",
     others: "The other two",
     sealNote: "Seal colour",
+    figure: "Full figure",
+    worlds: ["Midgard", "Vanaheim"],
+    hoverHint: "Hover over them – see them in Vanaheim.",
+    eyes: "Eyes",
   },
   footer: { author: "C G Martini", inspired: "Inspired by Eskil Larsson", terms: "Terms of sale" },
   characters: {
@@ -290,6 +321,7 @@ const en: Dict = {
       seal: "#1f3a6b",
       epithet: "The one who draws the pattern",
       hair: "Red",
+      eyes: "Blue",
       arrived: "On his thirteenth birthday",
       intro: [
         "Eskil sits in the back seat with the sketchbook against his thighs. His right hand works on its own. He has drawn the same pattern since the day his mother vanished – the day after his sixth birthday.",
@@ -308,6 +340,7 @@ const en: Dict = {
       seal: "#7a1c1c",
       epithet: "The one who counts the scars",
       hair: "Black",
+      eyes: "Green",
       arrived: "On his thirteenth birthday",
       intro: [
         "Black hair heavy over his forehead. Green eyes that size you up and sink back to the comic book. A grown man's shoulders on a thirteen-year-old.",
@@ -326,6 +359,7 @@ const en: Dict = {
       seal: "#2d5a3a",
       epithet: "The one who hears the crows",
       hair: "Pale blonde",
+      eyes: "Blue",
       arrived: "On her thirteenth birthday",
       intro: [
         "Pale blonde hair falls loose across her face. A red apple rolls between her fingers along the edge of the table, round after round. She doesn't like to talk.",

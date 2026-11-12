@@ -8,14 +8,24 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
   const t = getDict(locale);
   return (
     <>
-      <section className="hero">
-        <EyeInBark size={150} className="hero-eye" />
-        <p className="kicker">{t.hero.book}</p>
-        <h1>{t.meta.title}</h1>
-        <p className="slogan">{t.hero.slogan}</p>
-        <div className="hero-cta">
-          <Link className="btn btn-gold" href="/shop">{t.hero.ctaBuy}</Link>
-          <Link className="btn" href="#trion">{t.hero.ctaMeet}</Link>
+      <section className="hero cover-hero">
+        <div className="hero-bg" aria-hidden="true" />
+        <div className="hero-shade" aria-hidden="true" />
+        <div className="hero-inner">
+          <div className="hero-text">
+            <EyeInBark size={70} className="hero-eye" />
+            <p className="kicker">{t.hero.book}</p>
+            <h1>{t.hero.titleTop}<small>{t.hero.titleMid}</small>{t.hero.titleBottom}</h1>
+            <p className="slogan">{t.hero.slogan}</p>
+            <div className="hero-cta">
+              <Link className="btn btn-gold" href="/shop">{t.hero.ctaBuy}</Link>
+              <Link className="btn" href="#trion">{t.hero.ctaMeet}</Link>
+            </div>
+          </div>
+          <Link href="/shop" className="hero-book" aria-label={t.hero.ctaBuy}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/art/omslag.webp" alt={t.meta.title} />
+          </Link>
         </div>
       </section>
 
@@ -30,12 +40,13 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
         <p className="kicker">{t.trio.kicker}</p>
         <h2>{t.trio.title}</h2>
         <p className="lead">{t.trio.lead}</p>
+        <p className="hover-hint">{t.character.hoverHint}</p>
         <div className="trio-grid">
           {characterIds.map((id) => {
             const c = t.characters[id];
             return (
               <Link key={id} href={`/${id}`} className="trio-card">
-                <Portrait id={id} name={c.name} seal={c.seal} />
+                <Portrait id={id} name={c.name} seal={c.seal} labels={t.character.worlds} />
                 <h3>{c.name}</h3>
                 <p className="epithet">{c.epithet}</p>
                 <p className="trio-quote">– {c.quote}</p>

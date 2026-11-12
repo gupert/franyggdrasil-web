@@ -4,6 +4,8 @@ import "@fontsource/cormorant-garamond/400.css";
 import "@fontsource/cormorant-garamond/400-italic.css";
 import "@fontsource/cormorant-garamond/600.css";
 import "@fontsource/marcellus-sc/400.css";
+import "@fontsource/cinzel/500.css";
+import "@fontsource/cinzel/600.css";
 import { getDict, isLocale, locales } from "@/lib/content";
 import { Header, Footer } from "@/components/Chrome";
 import "../globals.css";

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { characterIds, getDict, locales, type CharacterId, type Locale } from "@/lib/content";
-import { Portrait, Sigil } from "@/components/Art";
+import { Portrait, Sigil, figureSrc } from "@/components/Art";
+import WorldToggle from "@/components/WorldToggle";
 
 type P = { params: Promise<{ locale: Locale; character: string }> };
 const isChar = (v: string): v is CharacterId => (characterIds as string[]).includes(v);
@@ -25,12 +26,15 @@ export default async function CharacterPage({ params }: P) {
   const t = getDict(locale);
   const c = t.characters[character];
   const others = characterIds.filter((id) => id !== character);
+  const figure = figureSrc(c.id);
 
   return (
     <article className="character" style={{ ["--seal" as string]: c.seal }}>
       <div className="character-hero">
         <div className="character-portrait">
-          <Portrait id={c.id} name={c.name} seal={c.seal} />
+          <WorldToggle labels={t.character.worlds}>
+            <Portrait id={c.id} name={c.name} seal={c.seal} labels={t.character.worlds} />
+          </WorldToggle>
         </div>
         <div className="character-text">
           <p className="kicker">{t.trio.kicker}</p>
@@ -41,11 +45,20 @@ export default async function CharacterPage({ params }: P) {
           <dl className="facts">
             <div><dt>{t.character.age}</dt><dd>13</dd></div>
             <div><dt>{t.character.hair}</dt><dd>{c.hair}</dd></div>
+            <div><dt>{t.character.eyes}</dt><dd>{c.eyes}</dd></div>
             <div><dt>{t.character.arrived}</dt><dd>{c.arrived}</dd></div>
             <div><dt>{t.character.sealNote}</dt><dd><span className="seal-dot" /></dd></div>
           </dl>
         </div>
       </div>
+
+      {figure && (
+        <section className="figure">
+          <h2>{t.character.figure}</h2>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={figure} alt={`${c.name} – ${t.character.figure}`} loading="lazy" />
+        </section>
+      )}
 
       <section className="dossier">
         <header>
