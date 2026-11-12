@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getDict, type Locale } from "@/lib/content";
 import BuyBox from "@/components/BuyBox";
 import Signup from "@/components/Signup";
+import BookFlip from "@/components/BookFlip";
 
 const AMAZON_ASIN = "9190290003";
 const AMAZON_MAIN = `https://www.amazon.se/dp/${AMAZON_ASIN}`;
@@ -27,9 +28,9 @@ export default async function Shop({ params }: P) {
   return (
     <>
       <section className="shop">
-        <div className="book-cover real">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/art/omslag.webp" alt={t.meta.title} />
+        <div className="shop-book">
+          <BookFlip alt={t.meta.title} backAlt={t.hero.backCover} />
+          <p className="book-hint">{t.hero.flipHint}</p>
         </div>
         <div className="shop-text">
           <p className="kicker">{t.shop.kicker}</p>

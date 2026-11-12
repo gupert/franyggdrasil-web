@@ -22,7 +22,7 @@ export type Character = {
 type Dict = {
   meta: { title: string; description: string };
   nav: { home: string; trio: string; shop: string; other: string; otherCode: string };
-  hero: { book: string; slogan: string; ctaBuy: string; ctaMeet: string; titleTop: string; titleMid: string; titleBottom: string };
+  hero: { book: string; slogan: string; ctaBuy: string; ctaMeet: string; titleTop: string; titleMid: string; titleBottom: string; flipHint: string; backCover: string };
   pitch: { kicker: string; body: string[] };
   trio: { kicker: string; title: string; lead: string; meet: string; age: string };
   series: { kicker: string; title: string; books: string[]; now: string; next: string };
@@ -73,6 +73,8 @@ const sv: Dict = {
   hero: {
     book: "Bok 1 av 9",
     titleTop: "Skriket",
+    flipHint: "För musen över boken – vänd på den.",
+    backCover: "Bokens baksida: Eskil, Idun och Rurik blickar ut över Vanaheim",
     titleMid: "från",
     titleBottom: "Yggdrasil",
     slogan: "Trädet minns allt.",
@@ -231,6 +233,8 @@ const en: Dict = {
   hero: {
     book: "Book 1 of 9",
     titleTop: "The Scream",
+    flipHint: "Hover over the book to turn it around.",
+    backCover: "Back cover: Eskil, Idun and Rurik looking out over Vanaheim",
     titleMid: "from",
     titleBottom: "Yggdrasil",
     slogan: "The tree remembers everything.",

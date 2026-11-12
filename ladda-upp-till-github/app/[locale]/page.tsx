@@ -2,6 +2,7 @@ import Link from "next/link";
 import { characterIds, getDict, type Locale } from "@/lib/content";
 import { EyeInBark, Portrait } from "@/components/Art";
 import Signup from "@/components/Signup";
+import BookFlip from "@/components/BookFlip";
 
 export default async function Home({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -22,10 +23,10 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
               <Link className="btn" href="#trion">{t.hero.ctaMeet}</Link>
             </div>
           </div>
-          <Link href="/shop" className="hero-book" aria-label={t.hero.ctaBuy}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/art/omslag.webp" alt={t.meta.title} />
-          </Link>
+          <div className="hero-book">
+            <BookFlip alt={t.meta.title} backAlt={t.hero.backCover} />
+            <p className="book-hint">{t.hero.flipHint}</p>
+          </div>
         </div>
       </section>
 
