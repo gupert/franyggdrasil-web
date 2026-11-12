@@ -18,10 +18,32 @@ function localeFromHost(host: string): Locale {
   return "sv"; // .se, förhandsvisningar och localhost
 }
 
+// De riktiga domänerna har ALLTID sitt eget språk: .se = svenska, .com = engelska.
+const SV_DOMAIN = /(^|\.)(xn--frnyggdrasil-ucb\.se|frånyggdrasil\.se|franyggdrasil\.se)$/;
+const EN_DOMAIN = /(^|\.)fromyggdrasil\.com$/;
+const SITE = { sv: "https://www.xn--frnyggdrasil-ucb.se", en: "https://www.fromyggdrasil.com" };
+
+function fixedLocale(host: string): Locale | null {
+  const h = host.toLowerCase().split(":")[0];
+  if (SV_DOMAIN.test(h)) return "sv";
+  if (EN_DOMAIN.test(h)) return "en";
+  return null; // förhandsvisning/localhost: språkväljaren styr
+}
+
 export function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
   const host = req.headers.get("host") ?? "";
   const queryLang = url.searchParams.get("lang");
+  const fixed = fixedLocale(host);
+
+  // På de riktiga domänerna byter språkknappen domän (samma sida)
+  if (fixed && (queryLang === "sv" || queryLang === "en")) {
+    if (queryLang === fixed) {
+      url.searchParams.delete("lang");
+      return NextResponse.redirect(url);
+    }
+    return NextResponse.redirect(new URL(url.pathname, SITE[queryLang]));
+  }
 
   // Explicit språkval via länk: spara och städa bort parametern ur adressen
   if (queryLang === "sv" || queryLang === "en") {
@@ -42,7 +64,7 @@ export function middleware(req: NextRequest) {
 
   const cookieLang = req.cookies.get("lang")?.value;
   const locale: Locale =
-    cookieLang === "sv" || cookieLang === "en" ? cookieLang : localeFromHost(host);
+    fixed ?? (cookieLang === "sv" || cookieLang === "en" ? cookieLang : localeFromHost(host));
 
   // idun.fromyggdrasil.com → karaktärssidan
   const sub = host.toLowerCase().split(".")[0];
