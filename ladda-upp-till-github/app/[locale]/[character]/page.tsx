@@ -46,17 +46,29 @@ export default async function CharacterPage({ params }: P) {
             <div><dt>{t.character.age}</dt><dd>13</dd></div>
             <div><dt>{t.character.hair}</dt><dd>{c.hair}</dd></div>
             <div><dt>{t.character.eyes}</dt><dd>{c.eyes}</dd></div>
-            <div><dt>{t.character.arrived}</dt><dd>{c.arrived}</dd></div>
-            <div><dt>{t.character.sealNote}</dt><dd><span className="seal-dot" /></dd></div>
           </dl>
         </div>
       </div>
 
-      {figure && (
+      {(figure.midgard || figure.vanaheim) && (
         <section className="figure">
           <h2>{t.character.figure}</h2>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={figure} alt={`${c.name} – ${t.character.figure}`} loading="lazy" />
+          <div className="figure-row">
+            {figure.midgard && (
+              <figure className="fig-midgard">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={figure.midgard} alt={`${c.name} – ${t.character.worlds[0]}`} loading="lazy" />
+                <figcaption>{t.character.worlds[0]}</figcaption>
+              </figure>
+            )}
+            {figure.vanaheim && (
+              <figure className="fig-vanaheim">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={figure.vanaheim} alt={`${c.name} – ${t.character.worlds[1]}`} loading="lazy" />
+                <figcaption>{t.character.worlds[1]}</figcaption>
+              </figure>
+            )}
+          </div>
         </section>
       )}
 

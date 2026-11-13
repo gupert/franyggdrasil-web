@@ -67,7 +67,10 @@ function findImage(name: string): string | null {
 
 // Porträtt: public/characters/<namn>.webp – Hela gestalten: public/characters/<namn>-gestalt.webp
 const portraitSrc = (id: CharacterId) => findImage(id);
-export const figureSrc = (id: CharacterId) => findImage(`${id}-gestalt`);
+export const figureSrc = (id: CharacterId) => ({
+  midgard: findImage(`${id}-gestalt-midgard`),
+  vanaheim: findImage(`${id}-gestalt-vanaheim`),
+});
 
 /* Stående porträtt i jugendvalv. Utan bild: siluett av skog + karaktärens sigill. */
 // Två världar: <namn>-midgard.webp (vardagskläder) och <namn>.webp (läderrustning i Vanaheim).
