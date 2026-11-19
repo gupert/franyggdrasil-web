@@ -59,6 +59,7 @@ type Dict = {
     worlds: [string, string];
     hoverHint: string;
     eyes: string;
+    followTikTok: string;
   };
   footer: { author: string; inspired: string; terms: string };
   characters: Record<CharacterId, Character>;
@@ -167,6 +168,7 @@ const sv: Dict = {
     worlds: ["Midgård", "Vanaheim"],
     hoverHint: "För musen över dem – se dem i Vanaheim.",
     eyes: "Ögon",
+    followTikTok: "Följ {name} på TikTok",
   },
   footer: { author: "C G Martini", inspired: "Inspirerad av Eskil Larsson", terms: "Köpvillkor" },
   characters: {
@@ -321,6 +323,7 @@ const en: Dict = {
     worlds: ["Midgard", "Vanaheim"],
     hoverHint: "Hover over them – see them in Vanaheim.",
     eyes: "Eyes",
+    followTikTok: "Follow {name} on TikTok",
   },
   footer: { author: "C G Martini", inspired: "Inspired by Eskil Larsson", terms: "Terms of sale" },
   characters: {

@@ -32,9 +32,12 @@ export function Sigil({ id, size = 64 }: { id: CharacterId; size?: number }) {
     <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
       {id === "idun" && (
         <g {...common}>
-          <path d="M32 20 C24 12 10 16 10 32 C10 48 22 56 32 52 C42 56 54 48 54 32 C54 16 40 12 32 20 Z" />
-          <path d="M32 20 C32 14 34 9 38 6" />
-          <path d="M36 11 C42 6 50 8 50 8 C46 14 40 14 36 11 Z" />
+          {/* Grodd: frö med stjälk och två blad */}
+          <ellipse cx="32" cy="50" rx="7" ry="5" />
+          <path d="M32 45 C32 36 32 28 32 18" />
+          <path d="M32 30 C24 30 16 25 14 16 C23 16 30 21 32 30 Z" />
+          <path d="M32 24 C38 24 46 20 49 11 C40 11 34 16 32 24 Z" />
+          <path d="M22 56 C26 54 38 54 42 56" opacity=".6" />
         </g>
       )}
       {id === "eskil" && (

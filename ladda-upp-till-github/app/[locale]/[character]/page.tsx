@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { characterIds, getDict, locales, type CharacterId, type Locale } from "@/lib/content";
 import { Portrait, Sigil, figureSrc } from "@/components/Art";
 import WorldToggle from "@/components/WorldToggle";
+import { TIKTOK, tiktokUrl, TikTokIcon } from "@/components/Chrome";
 
 type P = { params: Promise<{ locale: Locale; character: string }> };
 const isChar = (v: string): v is CharacterId => (characterIds as string[]).includes(v);
@@ -40,6 +41,11 @@ export default async function CharacterPage({ params }: P) {
           <p className="kicker">{t.trio.kicker}</p>
           <h1>{c.name}</h1>
           <p className="epithet">{c.epithet}</p>
+          {TIKTOK[c.id] && (
+            <a className="btn char-tiktok" href={tiktokUrl(TIKTOK[c.id]!)} target="_blank" rel="noopener">
+              <TikTokIcon size={16} /> {t.character.followTikTok.replace("{name}", c.name)}
+            </a>
+          )}
           <blockquote className="quote">– {c.quote}</blockquote>
           {c.intro.map((p, i) => <p key={i}>{p}</p>)}
           <dl className="facts">
