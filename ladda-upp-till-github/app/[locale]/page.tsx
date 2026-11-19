@@ -3,12 +3,41 @@ import { characterIds, getDict, type Locale } from "@/lib/content";
 import { EyeInBark, Portrait } from "@/components/Art";
 import Signup from "@/components/Signup";
 import BookFlip from "@/components/BookFlip";
+import type { Metadata } from "next";
+import { alternates, SITE } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return { alternates: alternates(locale, "/") };
+}
 
 export default async function Home({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   const t = getDict(locale);
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            { "@context": "https://schema.org", "@type": "WebSite", name: t.meta.title, alternateName: ["Skriket från Yggdrasil", "The Scream from Yggdrasil"], url: SITE[locale] + "/", inLanguage: locale },
+            {
+              "@context": "https://schema.org",
+              "@type": "Book",
+              name: t.meta.title,
+              author: { "@type": "Person", name: "C G Martini" },
+              bookFormat: "https://schema.org/Paperback",
+              inLanguage: "sv",
+              genre: "Fantasy",
+              typicalAgeRange: "12-",
+              datePublished: "2026-12-01",
+              image: SITE[locale] + "/art/omslag.webp",
+              description: t.meta.description,
+              url: SITE[locale] + "/shop",
+            },
+          ]),
+        }}
+      />
       <section className="hero cover-hero">
         <div className="hero-bg" aria-hidden="true" />
         <div className="hero-shade" aria-hidden="true" />

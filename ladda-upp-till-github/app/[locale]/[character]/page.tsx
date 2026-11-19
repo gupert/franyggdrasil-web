@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { characterIds, getDict, locales, type CharacterId, type Locale } from "@/lib/content";
 import { Portrait, Sigil, figureSrc } from "@/components/Art";
 import WorldToggle from "@/components/WorldToggle";
+import { alternates } from "@/lib/seo";
 import { TIKTOK, tiktokUrl, TikTokIcon } from "@/components/Chrome";
 
 type P = { params: Promise<{ locale: Locale; character: string }> };
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   const { locale, character } = await params;
   if (!isChar(character)) return {};
   const c = getDict(locale).characters[character];
-  return { title: c.name, description: `${c.name} – ${c.epithet}. ${c.intro[0]}` };
+  return { title: c.name, description: `${c.name} – ${c.epithet} ${c.intro[0]}`, alternates: alternates(locale, `/${character}`) };
 }
 
 export default async function CharacterPage({ params }: P) {

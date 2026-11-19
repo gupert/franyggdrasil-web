@@ -69,7 +69,7 @@ const sv: Dict = {
   meta: {
     title: "Skriket från Yggdrasil",
     description:
-      "Bok 1 av 9. Trettiofem år efter Ragnarök. Tre trettonåringar, ett hus av granit och ett träd som minns allt.",
+      "Bok 1 av 9 i en nordisk fantasyserie. Midgård, 35 år efter Ragnarök: tre trettonåringar, ett ungdomshem av granit och något som slår under huset. Förbeställ – släpps 1 december.",
   },
   nav: { home: "Start", trio: "Trion", shop: "Butik", other: "English", otherCode: "en" },
   hero: {
@@ -224,7 +224,7 @@ const en: Dict = {
   meta: {
     title: "The Scream from Yggdrasil",
     description:
-      "Book 1 of 9. Thirty-five years after Ragnarök. Three thirteen-year-olds, a house of granite and a tree that remembers everything.",
+      "Book 1 of 9 in a Nordic fantasy series. Midgard, 35 years after Ragnarök: three thirteen-year-olds, a granite youth home and something beating beneath the house. Pre-order – out 1 December.",
   },
   nav: { home: "Home", trio: "The Trio", shop: "Shop", other: "Svenska", otherCode: "sv" },
   hero: {

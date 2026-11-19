@@ -5,6 +5,7 @@ import BuyBox from "@/components/BuyBox";
 import Signup from "@/components/Signup";
 import BookFlip from "@/components/BookFlip";
 import Preorder from "@/components/Preorder";
+import { alternates } from "@/lib/seo";
 
 // Egen butik via Stripe visas bara om NEXT_PUBLIC_STRIPE_SHOP=true
 const STRIPE_SHOP = process.env.NEXT_PUBLIC_STRIPE_SHOP === "true";
@@ -13,7 +14,7 @@ type P = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {
   const { locale } = await params;
-  return { title: getDict(locale).nav.shop };
+  return { title: getDict(locale).nav.shop, alternates: alternates(locale, "/shop") };
 }
 
 export default async function Shop({ params }: P) {

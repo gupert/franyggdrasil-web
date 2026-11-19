@@ -6,7 +6,7 @@ import { getDict } from "@/lib/content";
 // TikTok-konton per karaktär
 export const TIKTOK: Partial<Record<"idun" | "rurik" | "eskil", string>> = {
   idun: "idunfromyggdrasil",
-  rurik: "rurikfromyggdrasil",
+  rurik: "rurik.from.yggdras", // byts till "rurikfromyggdrasil" den 11 december
   eskil: "eskilfromyggdrasil",
 };
 export const tiktokUrl = (handle: string) => `https://www.tiktok.com/@${handle}`;
