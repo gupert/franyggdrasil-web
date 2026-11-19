@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
-  const { email, locale } = await req.json().catch(() => ({}));
+  const { email, locale, source } = await req.json().catch(() => ({}));
   if (typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "invalid_email" }, { status: 400 });
   }
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
   const r = await fetch(hook, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, locale: locale === "en" ? "en" : "sv", source: "website", at: new Date().toISOString() }),
+    body: JSON.stringify({ email, locale: locale === "en" ? "en" : "sv", source: source === "forbestallning" ? "forbestallning" : "nyhetsbrev", at: new Date().toISOString() }),
   });
   return r.ok ? NextResponse.json({ ok: true }) : NextResponse.json({ error: "webhook_failed" }, { status: 502 });
 }

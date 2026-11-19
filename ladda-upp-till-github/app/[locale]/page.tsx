@@ -18,8 +18,9 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
             <p className="kicker">{t.hero.book}</p>
             <h1>{t.hero.titleTop}<small>{t.hero.titleMid}</small>{t.hero.titleBottom}</h1>
             <p className="slogan">{t.hero.slogan}</p>
+            <p className="hero-release">{t.hero.release}</p>
             <div className="hero-cta">
-              <Link className="btn btn-gold" href="/shop">{t.hero.ctaBuy}</Link>
+              <Link className="btn btn-gold" href="/shop#forbestall">{t.hero.ctaBuy}</Link>
               <Link className="btn" href="#trion">{t.hero.ctaMeet}</Link>
             </div>
           </div>

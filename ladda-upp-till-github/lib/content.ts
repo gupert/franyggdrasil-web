@@ -22,7 +22,7 @@ export type Character = {
 type Dict = {
   meta: { title: string; description: string };
   nav: { home: string; trio: string; shop: string; other: string; otherCode: string };
-  hero: { book: string; slogan: string; ctaBuy: string; ctaMeet: string; titleTop: string; titleMid: string; titleBottom: string; flipHint: string; backCover: string };
+  hero: { book: string; slogan: string; ctaBuy: string; ctaMeet: string; release: string; titleTop: string; titleMid: string; titleBottom: string; flipHint: string; backCover: string };
   pitch: { kicker: string; body: string[] };
   trio: { kicker: string; title: string; lead: string; meet: string; age: string };
   series: { kicker: string; title: string; books: string[]; now: string; next: string };
@@ -45,6 +45,7 @@ type Dict = {
     terms: string;
   };
   thanks: { title: string; body: string; back: string };
+  preorder: { button: string; placeholder: string; note: string; ok: string; err: string; release: string };
   character: {
     file: string;
     fileNote: string;
@@ -78,7 +79,8 @@ const sv: Dict = {
     titleMid: "från",
     titleBottom: "Yggdrasil",
     slogan: "Trädet minns allt.",
-    ctaBuy: "Köp boken",
+    ctaBuy: "Förbeställ boken",
+    release: "Släpps 1 december",
     ctaMeet: "Möt trion",
   },
   pitch: {
@@ -116,7 +118,7 @@ const sv: Dict = {
   },
   signup: {
     title: "Hör när trädet skriker",
-    lead: "Få besked när boken släpps, nya karaktärer vaknar och förbeställningar öppnar.",
+    lead: "Få besked när boken släpps och när nya karaktärer vaknar.",
     placeholder: "din@e-post.se",
     button: "Skriv upp mig",
     ok: "Tack. Trädet har noterat dig.",
@@ -138,6 +140,14 @@ const sv: Dict = {
     secure: "Säker betalning via Stripe – kort, Apple Pay, Google Pay med flera.",
     notReady: "Butiken öppnar inom kort. Skriv upp dig nedan så hör vi av oss.",
     terms: "Köpvillkor",
+  },
+  preorder: {
+    release: "Släpps 1 december",
+    placeholder: "din@e-post.se",
+    button: "Förbeställ",
+    note: "Skriv in din e-post. Den 1 december får du ett mejl med länken där du köper boken. Inget betalas nu.",
+    ok: "Tack. Du står på listan. Den 1 december hör du av oss.",
+    err: "Något gick fel. Försök igen om en stund.",
   },
   thanks: {
     title: "Tack för din beställning",
@@ -223,7 +233,8 @@ const en: Dict = {
     titleMid: "from",
     titleBottom: "Yggdrasil",
     slogan: "The tree remembers everything.",
-    ctaBuy: "Buy the book",
+    ctaBuy: "Pre-order the book",
+    release: "Out 1 December",
     ctaMeet: "Meet the trio",
   },
   pitch: {
@@ -283,6 +294,14 @@ const en: Dict = {
     secure: "Secure payment via Stripe – card, Apple Pay and Google Pay.",
     notReady: "The shop opens soon. Sign up below and we will let you know.",
     terms: "Terms of sale",
+  },
+  preorder: {
+    release: "Out 1 December",
+    placeholder: "you@email.com",
+    button: "Pre-order",
+    note: "Enter your email. On 1 December you will get an email with the link to buy the book. Nothing is charged now.",
+    ok: "Thank you. You are on the list. You will hear from us on 1 December.",
+    err: "Something went wrong. Please try again shortly.",
   },
   thanks: {
     title: "Thank you for your order",
